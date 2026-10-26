@@ -41,15 +41,17 @@ class GeofenceEditor {
 
     // Geofence type change
     const typeSelect = document.getElementById('geo-type-select');
-    if (typeSelect) {
       typeSelect.addEventListener('change', (e) => {
         this.drawMode = e.target.value;
         const radiusGroup = document.getElementById('geo-radius-group');
-        if (radiusGroup) {
-          radiusGroup.style.display = this.drawMode === 'circular' ? 'flex' : 'none';
-        }
+        const centerGroup = document.getElementById('geo-center-group');
+        const vertTextarea = document.getElementById('geo-vertices-text');
+        const vertGroup = vertTextarea ? vertTextarea.parentElement : null;
+
+        if (radiusGroup) radiusGroup.style.display = this.drawMode === 'circular' ? 'flex' : 'none';
+        if (centerGroup) centerGroup.style.display = this.drawMode === 'circular' ? 'grid' : 'none';
+        if (vertGroup) vertGroup.style.display = this.drawMode === 'polygonal' ? 'flex' : 'none';
       });
-    }
   }
 
   cancelDrawing() {

@@ -36,30 +36,28 @@
         (pin input line (at -30.48 -5.08 0) (length 5.08) (name "PC14/OSC32_IN" (effects (font (size 1.27 1.27)))) (number "8"))
         (pin output line (at -30.48 -10.16 0) (length 5.08) (name "PC15/OSC32_OUT" (effects (font (size 1.27 1.27)))) (number "9"))
         
-        ;; UART1 GNSS
-        (pin output line (at 30.48 20.32 180) (length 5.08) (name "PA9/USART1_TX" (effects (font (size 1.27 1.27)))) (number "101"))
-        (pin input line (at 30.48 17.78 180) (length 5.08) (name "PA10/USART1_RX" (effects (font (size 1.27 1.27)))) (number "102"))
+        ;; UART2 GNSS (u-blox MAX-M10S)
+        (pin output line (at 30.48 20.32 180) (length 5.08) (name "PA2/USART2_TX" (effects (font (size 1.27 1.27)))) (number "36"))
+        (pin input line (at 30.48 17.78 180) (length 5.08) (name "PA3/USART2_RX" (effects (font (size 1.27 1.27)))) (number "37"))
         
-        ;; UART2 Cellular
-        (pin output line (at 30.48 12.70 180) (length 5.08) (name "PA2/USART2_TX" (effects (font (size 1.27 1.27)))) (number "36"))
-        (pin input line (at 30.48 10.16 180) (length 5.08) (name "PA3/USART2_RX" (effects (font (size 1.27 1.27)))) (number "37"))
-        (pin output line (at 30.48 7.62 180) (length 5.08) (name "PA1/USART2_RTS" (effects (font (size 1.27 1.27)))) (number "35"))
-        (pin input line (at 30.48 5.08 180) (length 5.08) (name "PA0/USART2_CTS" (effects (font (size 1.27 1.27)))) (number "34"))
+        ;; UART1 Cellular Modem (u-blox SARA-R410M)
+        (pin output line (at 30.48 12.70 180) (length 5.08) (name "PA9/USART1_TX" (effects (font (size 1.27 1.27)))) (number "101"))
+        (pin input line (at 30.48 10.16 180) (length 5.08) (name "PA10/USART1_RX" (effects (font (size 1.27 1.27)))) (number "102"))
         
-        ;; SPI1 LIS2DW12
-        (pin output line (at 30.48 0.00 180) (length 5.08) (name "PA5/SPI1_SCK" (effects (font (size 1.27 1.27)))) (number "41"))
-        (pin input line (at 30.48 -2.54 180) (length 5.08) (name "PA6/SPI1_MISO" (effects (font (size 1.27 1.27)))) (number "42"))
-        (pin output line (at 30.48 -5.08 180) (length 5.08) (name "PA7/SPI1_MOSI" (effects (font (size 1.27 1.27)))) (number "43"))
-        (pin output line (at 30.48 -7.62 180) (length 5.08) (name "PA4/SPI1_CS" (effects (font (size 1.27 1.27)))) (number "40"))
+        ;; SPI1 Accelerometer (LIS2DW12)
+        (pin output line (at 30.48 2.54 180) (length 5.08) (name "PB5/SPI1_SCK" (effects (font (size 1.27 1.27)))) (number "135"))
+        (pin input line (at 30.48 0.00 180) (length 5.08) (name "PB6/SPI1_MISO" (effects (font (size 1.27 1.27)))) (number "136"))
+        (pin output line (at 30.48 -2.54 180) (length 5.08) (name "PB7/SPI1_MOSI" (effects (font (size 1.27 1.27)))) (number "137"))
+        (pin output line (at 30.48 -5.08 180) (length 5.08) (name "PB4/SPI1_CS" (effects (font (size 1.27 1.27)))) (number "134"))
         
-        ;; Power Gating Load Switches
-        (pin output line (at 30.48 -15.24 180) (length 5.08) (name "PB0/GNSS_PWR_EN" (effects (font (size 1.27 1.27)))) (number "46"))
-        (pin output line (at 30.48 -17.78 180) (length 5.08) (name "PB1/CELL_PWR_EN" (effects (font (size 1.27 1.27)))) (number "47"))
-        (pin output line (at 30.48 -20.32 180) (length 5.08) (name "PB2/CELL_RESET" (effects (font (size 1.27 1.27)))) (number "48"))
-        (pin output line (at 30.48 -22.86 180) (length 5.08) (name "PB14/STATUS_LED" (effects (font (size 1.27 1.27)))) (number "75"))
+        ;; Power Gating Load Switches (TPS22918)
+        (pin output line (at 30.48 -12.70 180) (length 5.08) (name "PA4/GNSS_SW_EN" (effects (font (size 1.27 1.27)))) (number "40"))
+        (pin output line (at 30.48 -15.24 180) (length 5.08) (name "PA5/MODEM_SW_EN" (effects (font (size 1.27 1.27)))) (number "41"))
+        (pin output line (at 30.48 -17.78 180) (length 5.08) (name "PC13/STATUS_LED" (effects (font (size 1.27 1.27)))) (number "7"))
+        (pin input line (at 30.48 -20.32 180) (length 5.08) (name "PA1/VBAT_ADC_IN6" (effects (font (size 1.27 1.27)))) (number "35"))
         
-        ;; Accelerometer Wake-Up EXTI Interrupt
-        (pin input line (at -30.48 10.16 0) (length 5.08) (name "PB10/ACCEL_INT1_EXTI" (effects (font (size 1.27 1.27)))) (number "69"))
+        ;; Accelerometer Wake-Up EXTI Interrupt (WKUP1 Pin)
+        (pin input line (at -30.48 10.16 0) (length 5.08) (name "PA0/ACCEL_INT1_WKUP1" (effects (font (size 1.27 1.27)))) (number "34"))
       )
     )
     (symbol "RF_GPS:MAX-M10S" (in_bom yes) (on_board yes)

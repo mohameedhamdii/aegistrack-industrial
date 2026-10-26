@@ -101,19 +101,19 @@ See [Full Bill of Materials](file:///hardware/bom.csv), [KiCad Project](file:///
 
 | Signal Name | STM32 Pin | Function | Peripheral |
 |---|---|---|---|
-| `GNSS_PWR_EN` | **PB0** | High = Turn on GNSS load switch | GPIO Output |
-| `CELL_PWR_EN` | **PB1** | High = Turn on Modem load switch | GPIO Output |
-| `CELL_RESET` | **PB2** | Active Low modem hardware reset | GPIO Output |
-| `ACCEL_INT1` | **PB10** | Wake-on-movement interrupt | EXTI10 Input |
-| `USART1_TX` | **PA9** | UBX transmit to GNSS | USART1 |
-| `USART1_RX` | **PA10** | UBX receive from GNSS | USART1 |
-| `USART2_TX` | **PA2** | AT commands to SARA-R410M | USART2 |
-| `USART2_RX` | **PA3** | AT responses from SARA-R410M | USART2 |
-| `SPI1_SCK` | **PA5** | SPI clock to LIS2DW12 | SPI1 |
-| `SPI1_MISO` | **PA6** | SPI data from LIS2DW12 | SPI1 |
-| `SPI1_MOSI` | **PA7** | SPI data to LIS2DW12 | SPI1 |
-| `SPI1_CS` | **PA4** | Accelerometer chip select | GPIO Output |
-| `STATUS_LED` | **PB14** | Low-current visual beacon | GPIO Output |
+| `GNSS_UART_TX` | **PA2** | UBX transmit to GNSS | USART2_TX |
+| `GNSS_UART_RX` | **PA3** | UBX receive from GNSS | USART2_RX |
+| `GNSS_SW_EN` | **PA4** | High = Turn on GNSS load switch | GPIO Output |
+| `MODEM_UART_TX` | **PA9** | AT commands to SARA-R410M | USART1_TX |
+| `MODEM_UART_RX` | **PA10** | AT responses from SARA-R410M | USART1_RX |
+| `MODEM_SW_EN` | **PA5** | High = Turn on Modem load switch | GPIO Output |
+| `ACCEL_SPI_SCK` | **PB5** | SPI clock to LIS2DW12 | SPI1_SCK |
+| `ACCEL_SPI_MISO` | **PB6** | SPI data from LIS2DW12 | SPI1_MISO |
+| `ACCEL_SPI_MOSI` | **PB7** | SPI data to LIS2DW12 | SPI1_MOSI |
+| `ACCEL_CS` | **PB4** | Accelerometer chip select | GPIO Output |
+| `ACCEL_INT1` | **PA0** | Wake-on-movement interrupt (WKUP1) | EXTI0 / WKUP1 |
+| `STATUS_LED` | **PC13** | Low-current visual beacon | GPIO Output |
+| `VBAT_SENSE` | **PA1** | Battery voltage divider sense | ADC1_IN6 |
 
 ---
 

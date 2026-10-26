@@ -202,9 +202,7 @@ async def ingest_telemetry(request: Request, db: Session = Depends(get_db)):
         payload_data = json.loads(pending_cmd.payload) if pending_cmd.payload else {}
         downlink_response = {"cmd": pending_cmd.cmd, **payload_data}
 
-    db.commit()
-
-    # Broadcast to dashboard via WebSocket
+    # Broadcast to dashboard via WebSocket (assembled before commit to avoid expired attribute reload)
     broadcast_data = {
         "type": "POSITION_UPDATE",
         "tracker": {
@@ -212,7 +210,7 @@ async def ingest_telemetry(request: Request, db: Session = Depends(get_db)):
             "name": tracker.name,
             "type": tracker.type,
             "status": tracker.status,
-            "last_seen": tracker.last_seen.isoformat(),
+            "last_seen": tracker.last_seen.isoformat() if tracker.last_seen else None,
         },
         "position": {
             "latitude": pos.latitude,
@@ -229,7 +227,7 @@ async def ingest_telemetry(request: Request, db: Session = Depends(get_db)):
             "anomaly_flags": pos.anomaly_flags,
             "eta_minutes": pos.eta_minutes,
             "sequence": pos.sequence,
-            "timestamp": pos.timestamp.isoformat(),
+            "timestamp": pos.timestamp.isoformat() if pos.timestamp else None,
         },
     }
     if alert_created:
@@ -239,8 +237,10 @@ async def ingest_telemetry(request: Request, db: Session = Depends(get_db)):
             "alert_type": alert_created.alert_type,
             "severity": alert_created.severity,
             "message": alert_created.message,
-            "timestamp": alert_created.timestamp.isoformat(),
+            "timestamp": alert_created.timestamp.isoformat() if alert_created.timestamp else None,
         }
+
+    db.commit()
 
     await ws_manager.broadcast(broadcast_data)
 

@@ -162,6 +162,8 @@ g_pfnVectors:
   .thumb_set SysTick_Handler,Default_Handler
   .weak RTC_WKUP_IRQHandler
   .thumb_set RTC_WKUP_IRQHandler,Default_Handler
+  .weak EXTI0_IRQHandler
+  .thumb_set EXTI0_IRQHandler,Default_Handler
   .weak EXTI1_IRQHandler
   .thumb_set EXTI1_IRQHandler,Default_Handler
   .weak USART1_IRQHandler

@@ -98,34 +98,36 @@ class UdpServerProtocol(asyncio.DatagramProtocol):
 
                 db.commit()
 
+                broadcast_data = {
+                    "type": "POSITION_UPDATE",
+                    "tracker": {
+                        "id": tracker.id,
+                        "name": tracker.name,
+                        "type": tracker.type,
+                        "status": tracker.status,
+                        "last_seen": tracker.last_seen.isoformat() if tracker.last_seen else None,
+                    },
+                    "position": {
+                        "latitude": pos.latitude,
+                        "longitude": pos.longitude,
+                        "altitude": pos.altitude,
+                        "speed": pos.speed,
+                        "heading": pos.heading,
+                        "battery_mv": pos.battery_mv,
+                        "temperature": pos.temperature,
+                        "fix_type": pos.fix_type,
+                        "hdop": pos.hdop,
+                        "geofence_event": pos.geofence_event,
+                        "geofence_zone": pos.geofence_zone,
+                        "anomaly_flags": pos.anomaly_flags,
+                        "eta_minutes": pos.eta_minutes,
+                        "sequence": pos.sequence,
+                        "timestamp": pos.timestamp.isoformat() if pos.timestamp else None,
+                    },
+                }
+
             # Push live update to connected dashboards
-            await ws_manager.broadcast({
-                "type": "POSITION_UPDATE",
-                "tracker": {
-                    "id": tracker.id,
-                    "name": tracker.name,
-                    "type": tracker.type,
-                    "status": tracker.status,
-                    "last_seen": tracker.last_seen.isoformat(),
-                },
-                "position": {
-                    "latitude": pos.latitude,
-                    "longitude": pos.longitude,
-                    "altitude": pos.altitude,
-                    "speed": pos.speed,
-                    "heading": pos.heading,
-                    "battery_mv": pos.battery_mv,
-                    "temperature": pos.temperature,
-                    "fix_type": pos.fix_type,
-                    "hdop": pos.hdop,
-                    "geofence_event": pos.geofence_event,
-                    "geofence_zone": pos.geofence_zone,
-                    "anomaly_flags": pos.anomaly_flags,
-                    "eta_minutes": pos.eta_minutes,
-                    "sequence": pos.sequence,
-                    "timestamp": pos.timestamp.isoformat(),
-                },
-            })
+            await ws_manager.broadcast(broadcast_data)
 
         except Exception as e:
             logger.error(f"Error processing UDP packet from {addr}: {e}")

@@ -93,7 +93,7 @@ static void mat4_vec_mul(const kf_mat4_t *A, const kf_vec4_t *x, kf_vec4_t *y)
 static int mat2_invert(const kf_mat2_t *A, kf_mat2_t *Ainv)
 {
     float det = A->m[0][0] * A->m[1][1] - A->m[0][1] * A->m[1][0];
-    if (fabsf(det) < 1e-12f) {
+    if (fabsf(det) < 1e-30f) {
         return -1;  /* Singular matrix */
     }
     float inv_det = 1.0f / det;

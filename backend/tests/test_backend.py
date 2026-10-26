@@ -136,3 +136,84 @@ def test_geofence_lifecycle_and_downlink():
     dl_data = res_dl.json()
     assert dl_data["cmd"] == "set_geofence"
     assert dl_data["zone_id"] == 5
+
+    # Delete geofence
+    res_del = client.delete("/api/v1/trackers/TRACKER-CONT-001/geofences/5")
+    assert res_del.status_code == 200
+    assert res_del.json()["status"] == "deleted"
+
+
+def test_static_assets_serving():
+    """Verify web dashboard static assets are served properly."""
+    res_index = client.get("/")
+    assert res_index.status_code == 200
+    assert "AegisTrack Industrial" in res_index.text
+
+    res_css = client.get("/css/style.css")
+    assert res_css.status_code == 200
+    assert "--bg-primary" in res_css.text
+
+    res_map_js = client.get("/js/map.js")
+    assert res_map_js.status_code == 200
+    assert "TrackerMap" in res_map_js.text
+
+
+def test_json_ingestion():
+    """Verify JSON ingestion fallback works as expected."""
+    payload = {
+        "id": "JSON-DEV-99",
+        "ts": 1761504000,
+        "lat": 51.5074,
+        "lon": -0.1278,
+        "alt": 20.0,
+        "spd": 1.5,
+        "hdg": 90.0,
+        "bat": 3615,
+        "temp": 22.0,
+        "fix": 3,
+        "hdop": 0.85,
+        "geo_evt": 1,
+        "geo_zone": 1,
+        "anomaly": 0,
+        "seq": 501,
+    }
+    res = client.post("/api/v1/ingest", json=payload)
+    assert res.status_code == 200
+    assert res.json()["status"] == "success"
+    assert res.json()["tracker_id"] == "JSON-DEV-99"
+
+
+def test_malformed_cbor_handling():
+    """Verify invalid CBOR returns 400 Bad Request."""
+    res = client.post(
+        "/api/v1/ingest",
+        content=b"\xff\xff\x00\x12garbage",
+        headers={"Content-Type": "application/cbor"},
+    )
+    assert res.status_code == 400
+
+
+def test_alert_acknowledgment():
+    """Verify alert listing and acknowledgment."""
+    res_alerts = client.get("/api/v1/alerts")
+    assert res_alerts.status_code == 200
+    alerts = res_alerts.json()
+    assert len(alerts) > 0
+
+    alert_id = alerts[0]["id"]
+    res_ack = client.post(f"/api/v1/alerts/{alert_id}/ack")
+    assert res_ack.status_code == 200
+    assert res_ack.json()["status"] == "acknowledged"
+
+
+def test_queue_downlink_command():
+    """Verify queuing custom downlink command."""
+    cmd_payload = {
+        "cmd": "set_interval",
+        "payload": {"value": 900}
+    }
+    res = client.post("/api/v1/trackers/TRACKER-CONT-001/command", json=cmd_payload)
+    assert res.status_code == 200
+    assert res.json()["cmd"] == "set_interval"
+    assert res.json()["status"] == "pending"
+
