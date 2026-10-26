@@ -18,8 +18,10 @@ client = TestClient(app)
 
 @pytest.fixture(autouse=True)
 def setup_db():
+    Base.metadata.drop_all(bind=engine)
     init_db()
     yield
+    Base.metadata.drop_all(bind=engine)
 
 
 def test_cbor_decoder_valid_packet():
