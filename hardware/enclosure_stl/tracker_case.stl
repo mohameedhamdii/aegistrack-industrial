@@ -1,0 +1,116 @@
+solid TrackerCase
+  facet normal 0.0 0.0 1.0
+    outer loop
+      vertex 0.0 0.0 50.0
+      vertex 120.0 0.0 50.0
+      vertex 120.0 90.0 50.0
+    endloop
+  endfacet
+  facet normal 0.0 0.0 1.0
+    outer loop
+      vertex 0.0 0.0 50.0
+      vertex 120.0 90.0 50.0
+      vertex 0.0 90.0 50.0
+    endloop
+  endfacet
+  facet normal 0.0 0.0 -1.0
+    outer loop
+      vertex 0.0 0.0 0.0
+      vertex 120.0 90.0 0.0
+      vertex 120.0 0.0 0.0
+    endloop
+  endfacet
+  facet normal 0.0 0.0 -1.0
+    outer loop
+      vertex 0.0 0.0 0.0
+      vertex 0.0 90.0 0.0
+      vertex 120.0 90.0 0.0
+    endloop
+  endfacet
+  facet normal -1.0 0.0 0.0
+    outer loop
+      vertex 0.0 0.0 0.0
+      vertex 0.0 90.0 50.0
+      vertex 0.0 0.0 50.0
+    endloop
+  endfacet
+  facet normal -1.0 0.0 0.0
+    outer loop
+      vertex 0.0 0.0 0.0
+      vertex 0.0 90.0 0.0
+      vertex 0.0 90.0 50.0
+    endloop
+  endfacet
+  facet normal 1.0 0.0 0.0
+    outer loop
+      vertex 120.0 0.0 0.0
+      vertex 120.0 0.0 50.0
+      vertex 120.0 90.0 50.0
+    endloop
+  endfacet
+  facet normal 1.0 0.0 0.0
+    outer loop
+      vertex 120.0 0.0 0.0
+      vertex 120.0 90.0 50.0
+      vertex 120.0 90.0 0.0
+    endloop
+  endfacet
+  facet normal 0.0 -1.0 0.0
+    outer loop
+      vertex 0.0 0.0 0.0
+      vertex 120.0 0.0 50.0
+      vertex 120.0 0.0 0.0
+    endloop
+  endfacet
+  facet normal 0.0 -1.0 0.0
+    outer loop
+      vertex 0.0 0.0 0.0
+      vertex 0.0 0.0 50.0
+      vertex 120.0 0.0 50.0
+    endloop
+  endfacet
+  facet normal 0.0 1.0 0.0
+    outer loop
+      vertex 0.0 90.0 0.0
+      vertex 120.0 90.0 0.0
+      vertex 120.0 90.0 50.0
+    endloop
+  endfacet
+  facet normal 0.0 1.0 0.0
+    outer loop
+      vertex 0.0 90.0 0.0
+      vertex 120.0 90.0 50.0
+      vertex 0.0 90.0 50.0
+    endloop
+  endfacet
+  ;; Bolt mounting flange left (-20mm to 0mm)
+  facet normal 0.0 0.0 1.0
+    outer loop
+      vertex -20.0 15.0 10.0
+      vertex 0.0 15.0 10.0
+      vertex 0.0 75.0 10.0
+    endloop
+  endfacet
+  facet normal 0.0 0.0 1.0
+    outer loop
+      vertex -20.0 15.0 10.0
+      vertex 0.0 75.0 10.0
+      vertex -20.0 75.0 10.0
+    endloop
+  endfacet
+  ;; Bolt mounting flange right (120mm to 140mm)
+  facet normal 0.0 0.0 1.0
+    outer loop
+      vertex 120.0 15.0 10.0
+      vertex 140.0 15.0 10.0
+      vertex 140.0 75.0 10.0
+    endloop
+  endfacet
+  facet normal 0.0 0.0 1.0
+    outer loop
+      vertex 120.0 15.0 10.0
+      vertex 140.0 75.0 10.0
+      vertex 120.0 75.0 10.0
+    endloop
+  endfacet
+endsolid TrackerCase

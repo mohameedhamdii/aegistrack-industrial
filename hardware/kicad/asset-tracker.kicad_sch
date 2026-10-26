@@ -1,0 +1,128 @@
+(kicad_sch (version 20230121) (generator eeschema)
+
+  (uuid "d8b3c690-341a-4672-9118-2e0618ff7ab2")
+
+  (paper "A3")
+
+  (title_block
+    (title "Ultra-Low-Power Multi-Year Asset Tracker (Container & Livestock)")
+    (date "2026-10-26")
+    (rev "1.2")
+    (company "Industrial IoT Telematics Inc.")
+    (comment 1 "MCU: STM32L4R5ZI | GNSS: u-blox MAX-M10S | Modem: u-blox SARA-R410M")
+    (comment 2 "Sensors: LIS2DW12 Accel | Battery: Tadiran TL-5930 3.6V 19Ah LTC")
+    (comment 3 "Average Sleep Current: 21 uA | Multi-Year Field Operation")
+  )
+
+  (lib_symbols
+    (symbol "Device:Battery_Cell" (pin_names (offset 0)) (in_bom yes) (on_board yes)
+      (property "Reference" "BT" (at 2.54 2.54 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "Tadiran_TL-5930" (at 2.54 -2.54 0) (effects (font (size 1.27 1.27))))
+      (property "Footprint" "Battery:BatteryHolder_Keystone_3.6V_D-Cell" (at 0 0 0) (effects (hide yes)))
+      (symbol "Battery_Cell_1_1"
+        (pin passive line (at 0 5.08 270) (length 2.54) (name "+" (effects (font (size 1.27 1.27)))) (number "1"))
+        (pin passive line (at 0 -5.08 90) (length 2.54) (name "-" (effects (font (size 1.27 1.27)))) (number "2"))
+      )
+    )
+    (symbol "MCU_ST:STM32L4R5ZI" (in_bom yes) (on_board yes)
+      (property "Reference" "U1" (at 0 25.4 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "STM32L4R5ZIT6" (at 0 -25.4 0) (effects (font (size 1.27 1.27))))
+      (property "Footprint" "Package_QFP:LQFP-144_20x20mm_P0.5mm" (at 0 0 0) (effects (hide yes)))
+      (symbol "STM32L4R5ZI_1_1"
+        (pin power_in line (at -30.48 20.32 0) (length 5.08) (name "VBAT" (effects (font (size 1.27 1.27)))) (number "6"))
+        (pin power_in line (at -30.48 15.24 0) (length 5.08) (name "VDD" (effects (font (size 1.27 1.27)))) (number "19"))
+        (pin power_in line (at -30.48 -20.32 0) (length 5.08) (name "VSS" (effects (font (size 1.27 1.27)))) (number "20"))
+        (pin input line (at -30.48 0 0) (length 5.08) (name "NRST" (effects (font (size 1.27 1.27)))) (number "25"))
+        (pin input line (at -30.48 -5.08 0) (length 5.08) (name "PC14/OSC32_IN" (effects (font (size 1.27 1.27)))) (number "8"))
+        (pin output line (at -30.48 -10.16 0) (length 5.08) (name "PC15/OSC32_OUT" (effects (font (size 1.27 1.27)))) (number "9"))
+        
+        ;; UART1 GNSS
+        (pin output line (at 30.48 20.32 180) (length 5.08) (name "PA9/USART1_TX" (effects (font (size 1.27 1.27)))) (number "101"))
+        (pin input line (at 30.48 17.78 180) (length 5.08) (name "PA10/USART1_RX" (effects (font (size 1.27 1.27)))) (number "102"))
+        
+        ;; UART2 Cellular
+        (pin output line (at 30.48 12.70 180) (length 5.08) (name "PA2/USART2_TX" (effects (font (size 1.27 1.27)))) (number "36"))
+        (pin input line (at 30.48 10.16 180) (length 5.08) (name "PA3/USART2_RX" (effects (font (size 1.27 1.27)))) (number "37"))
+        (pin output line (at 30.48 7.62 180) (length 5.08) (name "PA1/USART2_RTS" (effects (font (size 1.27 1.27)))) (number "35"))
+        (pin input line (at 30.48 5.08 180) (length 5.08) (name "PA0/USART2_CTS" (effects (font (size 1.27 1.27)))) (number "34"))
+        
+        ;; SPI1 LIS2DW12
+        (pin output line (at 30.48 0.00 180) (length 5.08) (name "PA5/SPI1_SCK" (effects (font (size 1.27 1.27)))) (number "41"))
+        (pin input line (at 30.48 -2.54 180) (length 5.08) (name "PA6/SPI1_MISO" (effects (font (size 1.27 1.27)))) (number "42"))
+        (pin output line (at 30.48 -5.08 180) (length 5.08) (name "PA7/SPI1_MOSI" (effects (font (size 1.27 1.27)))) (number "43"))
+        (pin output line (at 30.48 -7.62 180) (length 5.08) (name "PA4/SPI1_CS" (effects (font (size 1.27 1.27)))) (number "40"))
+        
+        ;; Power Gating Load Switches
+        (pin output line (at 30.48 -15.24 180) (length 5.08) (name "PB0/GNSS_PWR_EN" (effects (font (size 1.27 1.27)))) (number "46"))
+        (pin output line (at 30.48 -17.78 180) (length 5.08) (name "PB1/CELL_PWR_EN" (effects (font (size 1.27 1.27)))) (number "47"))
+        (pin output line (at 30.48 -20.32 180) (length 5.08) (name "PB2/CELL_RESET" (effects (font (size 1.27 1.27)))) (number "48"))
+        (pin output line (at 30.48 -22.86 180) (length 5.08) (name "PB14/STATUS_LED" (effects (font (size 1.27 1.27)))) (number "75"))
+        
+        ;; Accelerometer Wake-Up EXTI Interrupt
+        (pin input line (at -30.48 10.16 0) (length 5.08) (name "PB10/ACCEL_INT1_EXTI" (effects (font (size 1.27 1.27)))) (number "69"))
+      )
+    )
+    (symbol "RF_GPS:MAX-M10S" (in_bom yes) (on_board yes)
+      (property "Reference" "U2" (at 0 15.24 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "MAX-M10S-00B" (at 0 -15.24 0) (effects (font (size 1.27 1.27))))
+      (property "Footprint" "RF_GPS:u-blox_MAX" (at 0 0 0) (effects (hide yes)))
+      (symbol "MAX-M10S_1_1"
+        (pin power_in line (at -20.32 10.16 0) (length 5.08) (name "VCC" (effects (font (size 1.27 1.27)))) (number "8"))
+        (pin power_in line (at -20.32 -10.16 0) (length 5.08) (name "GND" (effects (font (size 1.27 1.27)))) (number "10"))
+        (pin input line (at 20.32 7.62 180) (length 5.08) (name "RXD" (effects (font (size 1.27 1.27)))) (number "3"))
+        (pin output line (at 20.32 5.08 180) (length 5.08) (name "TXD" (effects (font (size 1.27 1.27)))) (number "4"))
+        (pin input line (at -20.32 0 0) (length 5.08) (name "RF_IN" (effects (font (size 1.27 1.27)))) (number "11"))
+        (pin output line (at 20.32 0 180) (length 5.08) (name "TIMEPULSE" (effects (font (size 1.27 1.27)))) (number "2"))
+      )
+    )
+    (symbol "RF_Cellular:SARA-R410M" (in_bom yes) (on_board yes)
+      (property "Reference" "U3" (at 0 25.4 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "SARA-R410M-02B" (at 0 -25.4 0) (effects (font (size 1.27 1.27))))
+      (property "Footprint" "RF_Cellular:u-blox_SARA-R4" (at 0 0 0) (effects (hide yes)))
+      (symbol "SARA-R410M_1_1"
+        (pin power_in line (at -25.4 17.78 0) (length 5.08) (name "VCC" (effects (font (size 1.27 1.27)))) (number "51"))
+        (pin power_in line (at -25.4 -17.78 0) (length 5.08) (name "GND" (effects (font (size 1.27 1.27)))) (number "52"))
+        (pin input line (at 25.4 12.7 180) (length 5.08) (name "RXD" (effects (font (size 1.27 1.27)))) (number "7"))
+        (pin output line (at 25.4 10.16 180) (length 5.08) (name "TXD" (effects (font (size 1.27 1.27)))) (number "8"))
+        (pin input line (at 25.4 7.62 180) (length 5.08) (name "RTS" (effects (font (size 1.27 1.27)))) (number "9"))
+        (pin output line (at 25.4 5.08 180) (length 5.08) (name "CTS" (effects (font (size 1.27 1.27)))) (number "10"))
+        (pin input line (at -25.4 0 0) (length 5.08) (name "PWR_ON" (effects (font (size 1.27 1.27)))) (number "15"))
+        (pin input line (at -25.4 -5.08 0) (length 5.08) (name "RESET_N" (effects (font (size 1.27 1.27)))) (number "18"))
+        (pin passive line (at 25.4 -10.16 180) (length 5.08) (name "ANT" (effects (font (size 1.27 1.27)))) (number "56"))
+      )
+    )
+    (symbol "Sensor_Motion:LIS2DW12" (in_bom yes) (on_board yes)
+      (property "Reference" "U4" (at 0 12.7 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "LIS2DW12" (at 0 -12.7 0) (effects (font (size 1.27 1.27))))
+      (property "Footprint" "Package_LGA:LGA-12_2x2mm_P0.5mm" (at 0 0 0) (effects (hide yes)))
+      (symbol "LIS2DW12_1_1"
+        (pin power_in line (at -15.24 7.62 0) (length 5.08) (name "VDD" (effects (font (size 1.27 1.27)))) (number "1"))
+        (pin power_in line (at -15.24 -7.62 0) (length 5.08) (name "GND" (effects (font (size 1.27 1.27)))) (number "5"))
+        (pin input line (at 15.24 7.62 180) (length 5.08) (name "SCL/SPC" (effects (font (size 1.27 1.27)))) (number "4"))
+        (pin input line (at 15.24 5.08 180) (length 5.08) (name "SDA/SDI" (effects (font (size 1.27 1.27)))) (number "6"))
+        (pin output line (at 15.24 2.54 180) (length 5.08) (name "SA0/SDO" (effects (font (size 1.27 1.27)))) (number "7"))
+        (pin input line (at 15.24 0 180) (length 5.08) (name "CS" (effects (font (size 1.27 1.27)))) (number "8"))
+        (pin output line (at -15.24 0 0) (length 5.08) (name "INT1" (effects (font (size 1.27 1.27)))) (number "11"))
+      )
+    )
+    (symbol "Power_Switch:TPS22918" (in_bom yes) (on_board yes)
+      (property "Reference" "U5" (at 0 10.16 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "TPS22918DBVR" (at 0 -10.16 0) (effects (font (size 1.27 1.27))))
+      (property "Footprint" "Package_TO_SOT_SMD:SOT-23-6" (at 0 0 0) (effects (hide yes)))
+      (symbol "TPS22918_1_1"
+        (pin power_in line (at -15.24 5.08 0) (length 5.08) (name "VIN" (effects (font (size 1.27 1.27)))) (number "1"))
+        (pin power_out line (at 15.24 5.08 180) (length 5.08) (name "VOUT" (effects (font (size 1.27 1.27)))) (number "6"))
+        (pin input line (at -15.24 -2.54 0) (length 5.08) (name "ON" (effects (font (size 1.27 1.27)))) (number "3"))
+        (pin power_in line (at 0 -10.16 90) (length 5.08) (name "GND" (effects (font (size 1.27 1.27)))) (number "2"))
+      )
+    )
+  )
+
+  (wire (pts (xy 63.5 88.9) (xy 73.66 88.9)))
+  (wire (pts (xy 73.66 88.9) (xy 73.66 99.06)))
+  (wire (pts (xy 124.46 88.9) (xy 134.62 88.9)))
+
+  (sheet_instances
+    (path "/" (page "1"))
+  )
+)
